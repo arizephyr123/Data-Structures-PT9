@@ -141,7 +141,7 @@ class LinkedList:
             curr_node = curr_node.get_next()
         return max
 
-
+'''
 ll = LinkedList()
 # # ll.print_list()
 ll.add_to_head(3)
@@ -162,3 +162,4 @@ list.print_list()
 print(list.contains(10))
 print(list.contains(2))
 print(list.contains(1000))
+'''
