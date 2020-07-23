@@ -113,24 +113,52 @@ class LinkedList:
             return prev.get_value()
             
         
-    def contains(self, value):
-        pass
+    def contains(self, target):
+        contained = False
+        if self.length == 1:
+            if self.head.value == target:
+                return True
+        curr_node = self.head
+        i = 0
+        while i < self.length:
+            i += 1
+            if curr_node.value == target:
+                return True
+            curr_node = curr_node.get_next()
+        return contained
+
+            
 
     def get_max(self):
-        # iterate through all nodes
-        # cur_node = self.head
+        if self.length == 0:
+            return None
+        
+        max = self.head.value
+        curr_node = self.head
+        while curr_node is not None:
+            if curr_node.value > max:
+                max = curr_node.value
+            curr_node = curr_node.get_next()
+        return max
 
-        # while cur_node is not None:
-            pass
 
 ll = LinkedList()
-# ll.print_list()
+# # ll.print_list()
 ll.add_to_head(3)
-# ll.print_list()
-ll.add_to_head(2)
-# ll.print_list()
-ll.add_to_head(1)
-ll.remove_tail()
+# # ll.print_list()
+# ll.add_to_head(2)
+# # ll.print_list()
+# ll.add_to_head(1)
+# ll.remove_tail()
 ll.print_list()
+print(ll.contains(3))
 
-
+list = LinkedList()
+list.add_to_tail(1)
+list.add_to_tail(2)
+list.add_to_tail(5)
+list.add_to_tail(10)
+list.print_list()
+print(list.contains(10))
+print(list.contains(2))
+print(list.contains(1000))
