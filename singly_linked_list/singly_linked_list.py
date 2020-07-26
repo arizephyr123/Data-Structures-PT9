@@ -141,6 +141,18 @@ class LinkedList:
             curr_node = curr_node.get_next()
         return max
 
+
+ll = LinkedList()
+ll.print_list()
+ll.add_to_tail(3)
+ll.print_list()
+ll.add_to_head(2)
+ll.print_list()
+ll.add_to_head(1)
+ll.print_list()
+ll.add_to_tail(4)
+ll.print_list()
+
 '''
 ll = LinkedList()
 # # ll.print_list()
