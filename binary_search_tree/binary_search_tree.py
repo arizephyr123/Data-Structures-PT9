@@ -9,6 +9,7 @@ This part of the project comprises two days:
 2. Implement the `in_order_print`, `bft_print`, and `dft_print` methods
    on the BinarySearchTree class.
 """
+import random
 class BinarySearchTree:
     def __init__(self, value):
         self.value = value
@@ -58,30 +59,22 @@ class BinarySearchTree:
             else:
                 return False
         return contained
-            
-        # same path as insert node but then compare it to target
-            # equal return contained = true
-            # < we go left
-            # > we go right
-            # not in tree
-        pass
 
     # Return the maximum value found in the tree
     def get_max(self):
         # go right until right is None
-        pass
+        curr_node = self
+        max_val = self.value
+        if self.right:
+            curr_node = self.right
+            max_val = self.right.value
+            return curr_node.get_max()
+        else:
+            return max_val
 
     # Call the function `fn` on the value of each node
-    def for_each(self, fn):
-        curr_node = self
-        fn(curr_node.value)
-        stack = [] # nodes you need to backtrack to
-        while curr_node.left:
-            curr_node = self.left
-
-
-    '''
     # ** Recursion- uses built in memory to remember which nodes we need to backtrack to 
+    def for_each(self, fn):
         # base case when left and right are none
         # recursive case
         fn(self.value)
@@ -89,7 +82,6 @@ class BinarySearchTree:
             self.left.for_each(fn)
         if self.right is not None:
             self.right.for_each(fn)
-    '''
 
 
     # STRETCH
@@ -149,46 +141,28 @@ class BinarySearchTree:
         # left, right, parent
         pass
 
-bst = BinarySearchTree(5)
-bst.insert(2)
-print(bst.value, '= 5?')
-print(bst.left.value, '= 2?')
-bst.insert(3)
-print(bst.left.right.value, '= 3?')
-bst.insert(7)
-print(bst.right.value, '= 7?')
-print(bst.contains(5), '= True?')
-print(bst.contains(7), '= True?')
-print(bst.contains(8),'= False?')
-# bst.insert(6)
-# print(bst.left.right.value, ' = 3?')
-# print(bst.right.left.value,' = 6?')
-
-
-
-
 
 #=================================================
 """
 This code is necessary for testing the `print` methods
 """
-# bst = BinarySearchTree(1)
+bst = BinarySearchTree(1)
 
-# bst.insert(8)
-# bst.insert(5)
-# bst.insert(7)
-# bst.insert(6)
-# bst.insert(3)
-# bst.insert(4)
-# bst.insert(2)
+bst.insert(8)
+bst.insert(5)
+bst.insert(7)
+bst.insert(6)
+bst.insert(3)
+bst.insert(4)
+bst.insert(2)
 
-# bst.bft_print()
-# bst.dft_print()
+bst.bft_print()
+bst.dft_print()
 
-# print("elegant methods")
-# print("pre order")
-# bst.pre_order_dft()
-# print("in order")
-# bst.in_order_print()
-# print("post order")
-# bst.post_order_dft()  
+print("elegant methods")
+print("pre order")
+bst.pre_order_dft()
+print("in order")
+bst.in_order_print()
+print("post order")
+bst.post_order_dft()  
