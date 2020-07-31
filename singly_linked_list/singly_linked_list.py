@@ -141,16 +141,47 @@ class LinkedList:
             curr_node = curr_node.get_next()
         return max
 
+    # ================
+    # lecture question
+    # How do you reverse a singly linked list without recursion? 
+    # You may not store the list, or it's values, in another data structure.
+    #
+    # reverse pointers
+
+    def reverse_ll(self):
+        curr_node = self.head
+        next_one = curr_node.next_node
+
+        # head points to None
+        curr_node .set_next(None)
+        prev_node = curr_node
+        # don't forget to update head => tail
+        self.tail = curr_node
+        while next_one is not None:
+            prev_node = curr_node
+            curr_node = next_one
+            next_one = curr_node.get_next()
+            curr_node.set_next(prev_node)
+        self.head = curr_node
+        
+
+
 
 ll = LinkedList()
-ll.print_list()
+# ll.print_list()
 ll.add_to_tail(3)
-ll.print_list()
+# ll.print_list()
 ll.add_to_head(2)
-ll.print_list()
+# ll.print_list()
 ll.add_to_head(1)
-ll.print_list()
+# ll.print_list()
 ll.add_to_tail(4)
+# ll.print_list()
+ll.add_to_tail(5)
+ll.print_list()
+ll.reverse_ll()
+ll.print_list()
+ll.reverse_ll()
 ll.print_list()
 
 '''
