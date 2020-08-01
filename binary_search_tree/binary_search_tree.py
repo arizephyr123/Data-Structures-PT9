@@ -5,31 +5,94 @@ at searching for a particular piece of data in the tree.
 
 This part of the project comprises two days:
 1. Implement the methods `insert`, `contains`, `get_max`, and `for_each`
-   on the BSTNode class.
+   on the BinarySearchTree class.
 2. Implement the `in_order_print`, `bft_print`, and `dft_print` methods
-   on the BSTNode class.
+   on the BinarySearchTree class.
 """
-class BSTNode:
+import random
+class BinarySearchTree:
     def __init__(self, value):
         self.value = value
         self.left = None
         self.right = None
 
     # Insert the given value into the tree
+    
     def insert(self, value):
-        pass
+    # if value <= self.value:
+        if value <= self.value:
+            if self.left is None:
+                self.left = BinarySearchTree(value)
+            else: 
+                self.left.insert(value)
+
+        elif value > self.value:
+            if self.right is None:
+                self.right = BinarySearchTree(value)
+            else:
+                self.right.insert(value)
+
 
     # Return True if the tree contains the value
     # False if it does not
+    # sometimes 
     def contains(self, target):
-        pass
+        contained = False
+        if target == self.value:
+            return True
+
+        if target < self.value:
+            if self.left:
+                if target == self.left.value:
+                    contained = True
+                else:
+                    self.left.contains(target)
+            else:
+                return contained
+
+        if target > self.value:
+            if self.right:
+                if target == self.right.value:
+                    contained = True
+                else:
+                    self.right.contains(target)
+            else:
+                return False
+        return contained
 
     # Return the maximum value found in the tree
     def get_max(self):
-        pass
+        # go right until right is None
+        curr_node = self
+        max_val = self.value
+        if self.right:
+            curr_node = self.right
+            max_val = self.right.value
+            return curr_node.get_max()
+        else:
+            return max_val
 
     # Call the function `fn` on the value of each node
+    # ** Recursion- uses built in memory to remember which nodes we need to backtrack to 
     def for_each(self, fn):
+        # base case when left and right are none
+        # recursive case
+        fn(self.value)
+        if self.left is not None: #if self.left exists
+            self.left.for_each(fn)
+        if self.right is not None:
+            self.right.for_each(fn)
+
+
+    # STRETCH
+    # when deleted node has 2 children- then the largest of the 2 children becomes the parent of the other sibling
+    def delete(self, value):
+        # search like we did in contains()
+
+        # scenarios:
+        # node no children:
+            # update parent left/right
+        # 
         pass
 
     # Part 2 -----------------------
@@ -37,16 +100,32 @@ class BSTNode:
     # Print all the values in order from low to high
     # Hint:  Use a recursive, depth first traversal
     def in_order_print(self):
+        # as far left as tree goes, parent, right REPEAT
+        if self:
+            if self.left:
+                # go left with recursion
+                self.left.in_order_print()
+            print(self.value)
+
+            if self.right:
+                # go right with recursion
+                self.right.in_order_print()
+            print(self.value)
+
+
+            
         pass
 
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
     def bft_print(self):
+        # use queue
         pass
 
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
     def dft_print(self):
+        # use stack
         pass
 
     # Stretch Goals -------------------------
@@ -54,12 +133,16 @@ class BSTNode:
 
     # Print Pre-order recursive DFT
     def pre_order_dft(self):
+        # parent, left to end, back up to right then left
         pass
 
     # Print Post-order recursive DFT
     def post_order_dft(self):
+        # left, right, parent
         pass
 
+
+#=================================================
 """
 This code is necessary for testing the `print` methods
 """
@@ -80,6 +163,6 @@ print("elegant methods")
 print("pre order")
 bst.pre_order_dft()
 print("in order")
-bst.in_order_dft()
+bst.in_order_print()
 print("post order")
 bst.post_order_dft()  
